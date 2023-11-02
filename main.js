@@ -19,7 +19,7 @@ async function translateWord(){
 
 async function fetchContent(aWord){
     try {
-    const response = await fetch(`http://codexplained.se/animals_json.php?animal=${aWord}`);
+    const response = await fetch(`https://api.jamska.com/api/word/${aWord}`);
     if (!response.ok){
     throw new Error (`HTTP error! Status: ${response.status}`);
     }
