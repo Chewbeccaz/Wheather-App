@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="weather-box">
+        <h1 id="titel">Vad är det för väder?</h1>
         <div class="search">
             <input type="text" id="search-bar" placeholder="Sök stad">
             <button id="search-btn" onclick="checkWeather()">Sök</button>
@@ -19,6 +20,10 @@
             <p class="description"></p>
          </div>
 
+         <div class="march-btn">
+            <button id="march-btn" onclick="checkMarch()">Vill du kolla vädret på mars?</button>
+        </div>
+        
          <!-- Överflödig? -->
          <div id="display-content"></div>
     </div>
