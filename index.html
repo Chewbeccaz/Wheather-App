@@ -2,17 +2,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunskapskontroll</title>
+    <title>Kunskapskontroll 3</title>
 </head>
 <body>
-    <div class="wrapper">
-        <h1>Begrip Jamska</h1>
-        <input type="text" id="user-input" placeholder="Skriv ditt ord du vill översätta">
-        <button id="translate" onclick="translateWord()">Översätt</button>
-
-        <div id="display-data">
-            <!-- adding fetch-data here-->
-        </div>
+    <div class="weather-box">
+        <div class="search">
+            <input type="text" class="search-bar" placeholder="Sök stad">
+            <!-- Lägg till sökikon senare. -->
+            <button id="search" onclick="checkWeather()">Sök</button>
+         </div>
+         <div class="weather">
+            <h2 class="weather">Väder i Stochholm:</h2>
+            <div class="temp">14°C</div>
+         </div>
     </div>
 
 
