@@ -1,21 +1,54 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunskapskontroll</title>
+    <title>Kunskapskontroll 3</title>
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <h1>Begrip Jamska</h1>
-        <input type="text" id="user-input" placeholder="Skriv ditt ord du vill översätta">
-        <button id="translate" onclick="translateWord()">Översätt</button>
+    <div class="weather-box">
+        <div class="search">
+            <input type="text" id="search-bar" placeholder="Sök stad">
+            <button id="search-btn" onclick="checkWeather()">Sök</button>
+         </div>
+         <div class="weather">
+            <h2 class="city"></h2>
+            <h1 class="temp"></h1>
+            <img class="icon" src="" alt="">
+            <p class="description"></p>
+         </div>
 
-        <div id="display-data">
-            <!-- adding fetch-data here-->
-        </div>
+         <!-- Överflödig? -->
+         <div id="display-content"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
+
+
+
+<!-- <html lang="en">
+<head>
+    
+</head>
+<body>
+    <div class="weather-box">
+        <div class="search">
+            <input type="text" id="search-bar" placeholder="Sök stad">
+             Lägg till sökikon senare. 
+            <button id="search-btn" onclick="checkWeather()">Sök</button>
+         </div>
+         <div class="weather">
+            <h2 class="city">Väder i Stochholm:</h2>
+            <h1 class="temp">14°C</h1>
+         </div>
+         <div id="display-content">
+
+         </div>
     </div>
 
 
 <script src="main.js"></script>
 </body>
-</html>
+</html> -->
