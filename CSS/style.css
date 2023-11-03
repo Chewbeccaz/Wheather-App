@@ -23,7 +23,7 @@ body {
     justify-content: center;
 }
 /*Searchbtn*/
-#search{
+#search-btn{
     margin: 0.5em;
     border-radius: 50%;
     border: none;
@@ -36,7 +36,7 @@ body {
     transition: 0.2s ease-in-out;
 }
 
-input.search-bar {
+input#search-bar {
     border: none;
     outline: none;
     padding: 0.4em 1em;
@@ -45,4 +45,12 @@ input.search-bar {
     color: rgb(255, 255, 255);
     font-size: 105%;
     width: 75%;
+  }
+
+  h1, h2{
+    color:white; 
+  }
+
+  .description{
+    color:white; 
   }
