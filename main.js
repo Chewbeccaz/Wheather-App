@@ -1,14 +1,32 @@
-// main.js
+// FÖBÄTTRING: HÄMTA ALLA KÄLLOR SOM BEHÖVS FÖRST. 
+//ONCHANGE - för att ge förslag medan man skriver?
+//Se till att felmeddelandet försvinner när fetchen går bra igen
+//Togglefunktion för fahrenheit-celsius?
+
+//Knappfunktion för att byta mellan fahrenheit och celsius?
+//Jämföra graderna mellan två ställen? 
+
+//URLNASA: https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0
+
+
 const apiKey = "72c683fa486d6d0335603532705a98ff";
+const nasaKey ="PfosfTbZAfIs5okl0YCYmaGRVieJX9JHNsR2R2TW";
+
+
+const h2 = document.querySelector('.h2');
+const h1 = document.querySelector('.h1');
+const searchBox =document.querySelector('.search');
+
 
 async function checkWeather() {
     const inputCity = document.getElementById('search-bar').value;
-    const fetchedData = await fetchData(inputCity);
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
+    const fetchedData = await fetchData(weatherUrl);
     printResult(fetchedData);
 }
-
-async function fetchData(inputCity) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`);
+//Uppdatera så man bara skickar in URL: så man kan återanvända denna.
+async function fetchData(url) {
+    const response = await fetch(url);
     if (response.ok) {
         const data = await response.json();
         return data;
@@ -25,8 +43,8 @@ const printResult = (dataInput) => {
 
         console.log(dataInput)
 
-        document.querySelector('.city').innerHTML = "Vädret i " + dataInput.name + " är:"
-        document.querySelector('.temp').innerHTML = Math.round(dataInput.main.temp) + "°C";
+        h2.innerHTML = "Vädret i " + dataInput.name + " är:"
+        h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
         // document.querySelector('.icon').
         // document.querySelector('description').innerHTML = dataInput.weather[0]
 
@@ -39,72 +57,24 @@ const printResult = (dataInput) => {
         console.log("Something went wrong.");
         document.querySelector('.description').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
     }
-
-
-
-// const apiKey ="72c683fa486d6d0335603532705a98ff";
-
-// /* FUNGERANDE LÄNK… ERSÄTT MED VARIABLER
-// https://api.openweathermap.org/data/2.5/weather?q=Denver&units=metric&appid=72c683fa486d6d0335603532705a98ff
-// */
-
-// async function checkWeather(){
-//     const inputCity = document.getElementById('search-bar').value;
-//     console.log(inputCity)
-//     const fetchedData = fetchData(inputCity)
-//     printResult(fetchedData)
-// }
-
-// async function fetchData(){
-//     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${apiKey}`)
-//     if (response.ok) {
-//     const data = await response.json();
-//     console.log(data);
-//     return data; 
-//     } else {
-//         console.error("API request failed:", response.status);
-//     }
-// }
-
-// const printResult = (dataInput) => {
-//     const displayContent = document.getElementById('display-content');
-//     displayContent.innerHTML = ""; 
-
-//     document.querySelector('.city').innerHTML = dataInput.name;
-//     document.querySelector('.temp').innerHTML = dataInput.main.temp;
-
-
-    // console.log(dataInput)
-    // console.log(dataInput.main)
-    // console.log(dataInput.weather)
-   
-    //     // hämta id från api
-    //     const cityName = dataInput.name;
-    //     const temperature = dataInput.main.temp;
-    //     const weatherDescription = dataInput.weather[0].description;
-
-    //     const h2 = document.createElement('h2');
-    //     h2.innerText = `Väder i ${cityName}:`;
-    //     displayContent.appendChild(h2);
-
-    //     const h1 = document.createElement('h1');
-    //     h1.innerText = `${temperature}°C`;
-    //     displayContent.appendChild(h1);
-
-    //     const p = document.createElement('p');
-    //     p.innerText = weatherDescription;
-    //     displayContent.appendChild(p);
-
 }
 
-    // const { name } = dataInput.name;
-    // const { description } = dataInput.weather[0];
-    // const { temp } = dataInput.main.temp; 
-    // const { speed } = dataInput.wind.speed; 
-    // console.log(name, description, temp, speed);
+async function checkMars(){
+    h1.innerHTML="";
+    h2.innerHTML="";
+    searchBox.style.display = "none";
+    document.body.style.backgroundImage ="url('https://images.unsplash.com/photo-1559657693-e816ff3bd9af?auto=format&fit=crop&q=80&w=2942&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
+    //Göm även searchbar och h1. 
 
+    //Återanvända fetchdata, skriva om. 
+    const nasaUrl = `https://api.nasa.gov/insight_weather/?api_key=${nasaKey}&feedtype=json&ver=1.0`;
+    const marsData = await fetchData(nasaUrl);
+    printMars(marsData);
+}
 
-    // }
+const printMars = (dataInput) => {
+    console.log(dataInput);
+}
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
 // const yay = (data) => {
