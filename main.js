@@ -58,15 +58,19 @@ const printResult = (dataInput) => {
         //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
         if (dataInput.weather[0].description.includes('snow')) {
             document.querySelector('.icon').src = "IMG/snow.png";
+            document.querySelector('.icon').style.display = 'block';
          }
          else if (dataInput.weather[0].description.includes('rain')) {
             document.querySelector('.icon').src = "IMG/rain.png";
+            document.querySelector('.icon').style.display = 'block';
          }
          else if (dataInput.weather[0].description.includes('clouds')) {
             document.querySelector('.icon').src = "IMG/clouds.png";
+            document.querySelector('.icon').style.display = 'block';
          }
          else if (dataInput.weather[0].description.includes('sun')) {
             document.querySelector('.icon').src = "IMG/sun.png";
+            document.querySelector('.icon').style.display = 'block';
          }
 
     } else {

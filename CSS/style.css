@@ -20,6 +20,7 @@ body {
     color:fff; 
 }
 .icon{
+    display:none; 
     width: 40px; 
     height: 40px; 
 }
@@ -49,13 +50,13 @@ body {
 #search-btn:hover{
     background: #6d686883;
 }
-.march-btn{
+.fahrenheit-box{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#march-btn{
+#fahrenheit-btn{
     margin: 0 auto; 
     border-radius: 10px;
     height: 40px;
