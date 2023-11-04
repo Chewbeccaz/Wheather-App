@@ -57,7 +57,13 @@ const printResult = (dataInput) => {
         //Här kan man lägga till ikoner på väder om man vill. 
         //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
         if (dataInput.weather[0].description.includes('snow')) {
-            document.querySelector('.icon').src = "url_to_snow_icon";
+            document.querySelector('.icon').src = "IMG/snow.png";
+         }
+         else if (dataInput.weather[0].description.includes('rain')) {
+            document.querySelector('.icon').src = "IMG/rain.png";
+         }
+         else if (dataInput.weather[0].description.includes('clouds')) {
+            document.querySelector('.icon').src = "IMG/rain.png";
          }
          
 
