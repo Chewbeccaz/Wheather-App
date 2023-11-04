@@ -65,7 +65,7 @@ const printResult = (dataInput) => {
          else if (dataInput.weather[0].description.includes('clouds')) {
             document.querySelector('.icon').src = "IMG/clouds.png";
          }
-         else {
+         else if (dataInput.weather[0].description.includes('sun')) {
             document.querySelector('.icon').src = "IMG/sun.png";
          }
 
