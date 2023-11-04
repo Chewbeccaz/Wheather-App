@@ -2,6 +2,7 @@
 //ONCHANGE - för att ge förslag medan man skriver?
 //Se till att felmeddelandet försvinner när fetchen går bra igen
 //Togglefunktion för fahrenheit-celsius?
+//En överraska mig knapp som genererar en random stad? 
 
 //Knappfunktion för att byta mellan fahrenheit och celsius?
 //Jämföra graderna mellan två ställen? 
@@ -10,8 +11,10 @@
 
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
-const nasaKey ="PfosfTbZAfIs5okl0YCYmaGRVieJX9JHNsR2R2TW";
+// const nasaKey ="PfosfTbZAfIs5okl0YCYmaGRVieJX9JHNsR2R2TW";
 
+// variabel för att kunna toggla functionen. 
+let isCelsius = true; 
 
 const h2 = document.querySelector('.h2');
 const h1 = document.querySelector('.h1');
@@ -32,26 +35,43 @@ async function fetchData(url) {
         return data;
     } else {
         console.error("API request failed:", response.status);
-        return null; // Return null or handle the error as needed
+        return null; //Måste den finnas? 
     }
 }
 
 const printResult = (dataInput) => {
     if (dataInput) {
-        const displayContent = document.getElementById('display-content');
-        displayContent.innerHTML = "";
+        
 
         console.log(dataInput)
 
         h2.innerHTML = "Vädret i " + dataInput.name + " är:"
         h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
+
+        const temperature = Math.round(dataInput.main.temp);
+        const unit = isCelsius ? '°C' : '°F';
+        h1.innerHTML = `${temperature}${unit}`;
         // document.querySelector('.icon').
         // document.querySelector('description').innerHTML = dataInput.weather[0]
 
         //Här kan man lägga till ikoner på väder om man vill. 
-        if (dataInput.weather[0].main == "Clouds"){
-            document.querySelector('.icon').src ="imgsourceurl."
-        }
+        //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
+        if (dataInput.weather[0].description.includes('snow')) {
+            document.querySelector('.icon').src = "IMG/snow.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
+         else if (dataInput.weather[0].description.includes('rain')) {
+            document.querySelector('.icon').src = "IMG/rain.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
+         else if (dataInput.weather[0].description.includes('clouds')) {
+            document.querySelector('.icon').src = "IMG/clouds.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
+         else if (dataInput.weather[0].description.includes('sun')) {
+            document.querySelector('.icon').src = "IMG/sun.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
 
     } else {
         console.log("Something went wrong.");
@@ -59,21 +79,13 @@ const printResult = (dataInput) => {
     }
 }
 
-async function checkMars(){
-    h1.innerHTML="";
-    h2.innerHTML="";
-    searchBox.style.display = "none";
-    document.body.style.backgroundImage ="url('https://images.unsplash.com/photo-1559657693-e816ff3bd9af?auto=format&fit=crop&q=80&w=2942&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
-    //Göm även searchbar och h1. 
-
-    //Återanvända fetchdata, skriva om. 
-    const nasaUrl = `https://api.nasa.gov/insight_weather/?api_key=${nasaKey}&feedtype=json&ver=1.0`;
-    const marsData = await fetchData(nasaUrl);
-    printMars(marsData);
-}
-
-const printMars = (dataInput) => {
-    console.log(dataInput);
+async function changeMetric(){
+    isCelsius = !isCelsius; // Toggle the value
+    const inputCity = document.getElementById('search-bar').value;
+    const units = isCelsius ? 'metric' : 'imperial'; // Change 'units' based on 'isCelsius'
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
+    const fetchedData = await fetchData(weatherUrl);
+    printResult(fetchedData);
 }
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
