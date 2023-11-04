@@ -87,6 +87,7 @@ input#search-bar {
     color:white; 
   }
 
-  .description{
+  .error{
+    display: none;
     color:white; 
   }

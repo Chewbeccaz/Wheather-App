@@ -18,10 +18,17 @@ let isCelsius = true;
 
 const h2 = document.querySelector('.h2');
 const h1 = document.querySelector('.h1');
+const icon = document.querySelector('.icon');
+const fahrBtn = document.querySelector('#fahrenheit-btn')
 const searchBox =document.querySelector('.search');
 
 
 async function checkWeather() {
+    h1.innerHTML="";
+    h2.innerHTML="";
+    icon.style.display='none'; 
+   
+
     const inputCity = document.getElementById('search-bar').value;
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
     const fetchedData = await fetchData(weatherUrl);
@@ -39,7 +46,7 @@ async function fetchData(url) {
     }
 }
 
-const printResult = (dataInput) => {
+const printResult = (dataInput, isCelsius) => {
     if (dataInput) {
         
 
@@ -75,7 +82,8 @@ const printResult = (dataInput) => {
 
     } else {
         console.log("Something went wrong.");
-        document.querySelector('.description').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+        document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+        document.querySelector('.error').style.display = 'block';
     }
 }
 
@@ -85,7 +93,7 @@ async function changeMetric(){
     const units = isCelsius ? 'metric' : 'imperial'; // Change 'units' based on 'isCelsius'
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
     const fetchedData = await fetchData(weatherUrl);
-    printResult(fetchedData);
+    printResult(fetchedData, isCelsius)
 }
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
@@ -95,49 +103,4 @@ async function changeMetric(){
 
 // const nooo = (error) => {
 //     console.error(':(')
-// }
-
-
-
-
-
-
-// async function translateWord(){
-//     const userInput = document.getElementById('user-input').value;
-//     console.log(userInput)
-//     try{ 
-//     const fetchedWord = await fetchContent (userInput)
-//     printResults(fetchedWord)
-//     } catch (error){
-//         console.error("Hoppsan, något har blivit tullut (läs: fel)", error); 
-//          // Display errormsg
-//          const displayContent = document.getElementById('display-data');
-//          displayContent.innerHTML = "";
- 
-//          const errorP = document.createElement('p');
-//          errorP.innerText = "Hoppsan, något har blivit tullut (läs: fel)";
-//          displayContent.appendChild(errorP);
-//      }
-//     }
-
-// async function fetchContent(aWord){
-//     try {
-//     const response = await fetch(`https://api.jamska.com/api/word/${aWord}`);
-//     if (!response.ok){
-//     throw new Error (`HTTP error! Status: ${response.status}`);
-//     }
-//     const data = await response.json(); //Eller kommer det bli text?? 
-//     return data;
-//     } catch (error){
-//         throw error; 
-//     }
-// }
-
-// const printResults = (dataInput) => {
-//     const displayContent = document.getElementById('display-data');
-//     displayContent.innerHTML = ""; 
-
-//     const p = document.createElement('p');
-//     p.innerText = dataInput.content; //Eller vad det nu står i detta API
-//     displayContent.appendChild(p);
 // }
