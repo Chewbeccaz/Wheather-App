@@ -2,6 +2,7 @@
 //ONCHANGE - för att ge förslag medan man skriver?
 //Se till att felmeddelandet försvinner när fetchen går bra igen
 //Togglefunktion för fahrenheit-celsius?
+//En överraska mig knapp som genererar en random stad? 
 
 //Knappfunktion för att byta mellan fahrenheit och celsius?
 //Jämföra graderna mellan två ställen? 
@@ -54,9 +55,11 @@ const printResult = (dataInput) => {
         // document.querySelector('description').innerHTML = dataInput.weather[0]
 
         //Här kan man lägga till ikoner på väder om man vill. 
-        if (dataInput.weather[0].main == "Clouds"){
-            document.querySelector('.icon').src ="imgsourceurl."
-        }
+        //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
+        if (dataInput.weather[0].description.includes('snow')) {
+            document.querySelector('.icon').src = "url_to_snow_icon";
+         }
+         
 
     } else {
         console.log("Something went wrong.");
