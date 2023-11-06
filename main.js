@@ -1,10 +1,12 @@
 // FÖBÄTTRING: HÄMTA ALLA KÄLLOR SOM BEHÖVS FÖRST. 
 //ONCHANGE - för att ge förslag medan man skriver?
 //Se till att felmeddelandet försvinner när fetchen går bra igen
-//Togglefunktion för fahrenheit-celsius?
+
 //En överraska mig knapp som genererar en random stad? 
 
-//Knappfunktion för att byta mellan fahrenheit och celsius?
+//Få Ändra-knappen att endast synas efter man sökt en gång. 
+
+
 //Jämföra graderna mellan två ställen? 
 
 //URLNASA: https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0
@@ -46,20 +48,16 @@ async function fetchData(url) {
     }
 }
 
-const printResult = (dataInput, isCelsius) => {
+const printResult = (dataInput) => {
     if (dataInput) {
-        
-
         console.log(dataInput)
 
         h2.innerHTML = "Vädret i " + dataInput.name + " är:"
-        h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
+        // h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
 
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
         h1.innerHTML = `${temperature}${unit}`;
-        // document.querySelector('.icon').
-        // document.querySelector('description').innerHTML = dataInput.weather[0]
 
         //Här kan man lägga till ikoner på väder om man vill. 
         //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
@@ -88,12 +86,14 @@ const printResult = (dataInput, isCelsius) => {
 }
 
 async function changeMetric(){
-    isCelsius = !isCelsius; // Toggle the value
+    console.log('funkar detta?')
     const inputCity = document.getElementById('search-bar').value;
     const units = isCelsius ? 'metric' : 'imperial'; // Change 'units' based on 'isCelsius'
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
     const fetchedData = await fetchData(weatherUrl);
-    printResult(fetchedData, isCelsius)
+    printResult(fetchedData, isCelsius, units)
+
+    isCelsius = !isCelsius; // Toggle the value
 
     //Ändra text beroende på om isCelsius is true/false. 
     fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
