@@ -94,6 +94,9 @@ async function changeMetric(){
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
     const fetchedData = await fetchData(weatherUrl);
     printResult(fetchedData, isCelsius)
+
+    //Ändra text beroende på om isCelsius is true/false. 
+    fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
 }
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
