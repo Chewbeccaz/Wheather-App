@@ -7,13 +7,18 @@
 //Få Ändra-knappen att endast synas efter man sökt en gång. 
 
 
-//Jämföra graderna mellan två ställen? 
+//Jämföra graderna mellan två ställen?
+//Lägga till description fog.  
 
-//URLNASA: https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0
+
+//JOHAN. 
+//1. ERRORHANTERING. VART OCH VAD MER?
+//2. BUGG - Beror på units. Måste skickas med från början. 
+//3. HJÄLP??????
 
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
-// const nasaKey ="PfosfTbZAfIs5okl0YCYmaGRVieJX9JHNsR2R2TW";
+const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}`
 
 // variabel för att kunna toggla functionen. 
 let isCelsius = true; 
@@ -21,22 +26,31 @@ let isCelsius = true;
 const h2 = document.querySelector('.h2');
 const h1 = document.querySelector('.h1');
 const icon = document.querySelector('.icon');
-const fahrBtn = document.querySelector('#fahrenheit-btn')
-const searchBox =document.querySelector('.search');
+const fahrBtn = document.querySelector('#fahrenheit-btn');
+const searchBox = document.querySelector('.search');
 
-
+function getUnit() {
+    return isCelsius ? 'metric' : 'imperial';
+}
 async function checkWeather() {
-    h1.innerHTML="";
-    h2.innerHTML="";
-    icon.style.display='none'; 
-   
+    h1.innerHTML = "";
+    h2.innerHTML = "";
+    icon.style.display = 'none'; 
 
     const inputCity = document.getElementById('search-bar').value;
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
+    const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
+    //const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
     const fetchedData = await fetchData(weatherUrl);
+
+    const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
+
+    document.querySelector('body').appendChild(
+        document.createTextNode(wikipediaSummary.extract)
+    )
+
     printResult(fetchedData);
 }
-//Uppdatera så man bara skickar in URL: så man kan återanvända denna.
+
 async function fetchData(url) {
     const response = await fetch(url);
     if (response.ok) {
@@ -44,11 +58,12 @@ async function fetchData(url) {
         return data;
     } else {
         console.error("API request failed:", response.status);
-        return null; //Måste den finnas? 
+        return null; 
     }
 }
 
 const printResult = (dataInput) => {
+    document.querySelector('.content').innerHTML = "";
     if (dataInput) {
         console.log(dataInput)
 
@@ -80,24 +95,28 @@ const printResult = (dataInput) => {
 
     } else {
         console.log("Something went wrong.");
-        document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
-        document.querySelector('.error').style.display = 'block';
+        document.querySelector('.content').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+        document.querySelector('.content').style.display = 'block';
     }
 }
 
-async function changeMetric(){
+async function changeMetric() {
     console.log('funkar detta?')
-    const inputCity = document.getElementById('search-bar').value;
-    const units = isCelsius ? 'metric' : 'imperial'; // Change 'units' based on 'isCelsius'
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
-    const fetchedData = await fetchData(weatherUrl);
-    printResult(fetchedData, isCelsius, units)
-
     isCelsius = !isCelsius; // Toggle the value
+
+    const inputCity = document.getElementById('search-bar').value;
+    const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
+    //const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=${units}&q=${inputCity}&appid=${apiKey}`;
+    const fetchedData = await fetchData(weatherUrl);
+
+    printResult(fetchedData);
+
 
     //Ändra text beroende på om isCelsius is true/false. 
     fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
 }
+
+
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
 // const yay = (data) => {
