@@ -61,19 +61,24 @@ body {
 .fahrenheit-box{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 #fahrenheit-btn{
-    margin: 0 auto; 
-    border-radius: 10px;
-    height: 40px;
-    width: 200px;
+    margin: 0.5em;
+    border-radius: 50%;
+    border: none;
+    height: 44px;
+    width: 44px;
     background: #a6a1a183;
     color: white;
     cursor: pointer;
     transition: 0.2s ease-in-out;
 }
+#fahrenheit-btn:hover{
+    background: #6d686883;
+}
+
 
 input#search-bar {
     border: none;
@@ -93,6 +98,11 @@ input#search-bar {
 
   h1, h2, .wikipedia-content{
     color:white; 
+  }
+
+  .wikipedia-content{
+    color:white;
+    padding:20px; 
   }
 
   .error{

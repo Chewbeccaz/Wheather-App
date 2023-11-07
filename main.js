@@ -10,6 +10,9 @@
 //Skriva ut även beskrivningen? 
 //HOVER EFFEKT PÅ SEARCHBAR OCH FAHRENHEIT KNAPPEN
 //Flytta farh knappen till höger längst ner. 
+//Fixa ny fontfamily. 
+//Städa
+//Fixa root: styling. Korta ner. 
 
 
 //JOHAN. 
@@ -126,7 +129,7 @@ async function changeMetric() {
 
 
     //Ändra text beroende på om isCelsius is true/false. 
-    fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
+    fahrBtn.innerText = isCelsius ? '°F' : '°C';
 }
 
 function printSummary(wikipediaSummary){
