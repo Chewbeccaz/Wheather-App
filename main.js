@@ -1,8 +1,6 @@
 // FÖBÄTTRING: HÄMTA ALLA KÄLLOR SOM BEHÖVS FÖRST. 
 //ONCHANGE - för att ge förslag medan man skriver?
-
-//Se till att wikipedia-s bara syns om fetch gått bra. If ok. 
-//Få border att vara osynliga tills man fått resultat. 
+ 
 
 //En överraska mig knapp som genererar en random stad? 
 
@@ -11,6 +9,7 @@
 //Ev. lägga till högsta och lägsta temp?? 
 //Skriva ut även beskrivningen? 
 //HOVER EFFEKT PÅ SEARCHBAR OCH FAHRENHEIT KNAPPEN
+//Flytta farh knappen till höger längst ner. 
 
 
 //JOHAN. 
@@ -25,6 +24,8 @@ let isCelsius = true;
 
 const h2 = document.querySelector('.h2');
 const h1 = document.querySelector('.h1');
+const firstH3 = document.querySelector('.h3-1');
+const secondH3 = document.querySelector('.h3-2');
 const icon = document.querySelector('.icon');
 const fahrBtn = document.querySelector('#fahrenheit-btn');
 const searchBox = document.querySelector('.search');
@@ -77,7 +78,8 @@ const printResult = (dataInput) => {
     if (dataInput) {
         console.log(dataInput)
 
-        h2.innerHTML = "Vädret i " + dataInput.name + " är:"
+        firstH3.innerHTML = "Vädret i ";
+        h2.innerHTML = dataInput.name;
 
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';

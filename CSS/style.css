@@ -117,6 +117,15 @@ input#search-bar {
 
 .box1, .box2{
     border-right: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.h3-1{
+    margin-bottom:0px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
 }
 
 .wikipedia-content {
