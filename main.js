@@ -1,14 +1,14 @@
 // FÖBÄTTRING: HÄMTA ALLA KÄLLOR SOM BEHÖVS FÖRST. 
 //ONCHANGE - för att ge förslag medan man skriver?
-//Se till att felmeddelandet försvinner när fetchen går bra igen
+
+//Se till att wikipedia-s bara syns om fetch gått bra. If ok. 
+//Få border att vara osynliga tills man fått resultat. 
 
 //En överraska mig knapp som genererar en random stad? 
 
 //Få Ändra-knappen att endast synas efter man sökt en gång. 
 
-
-//Jämföra graderna mellan två ställen?
-//Lägga till description fog.  
+//Ev. lägga till högsta och lägsta temp?? 
 
 
 //JOHAN. 
@@ -32,6 +32,7 @@ const searchBox = document.querySelector('.search');
 function getUnit() {
     return isCelsius ? 'metric' : 'imperial';
 }
+
 async function checkWeather() {
     h1.innerHTML = "";
     h2.innerHTML = "";
@@ -39,7 +40,7 @@ async function checkWeather() {
 
     const inputCity = document.getElementById('search-bar').value;
     const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
-    //const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
+
     const fetchedData = await fetchData(weatherUrl);
 
     const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
@@ -65,6 +66,8 @@ async function fetchData(url) {
 
 const printResult = (dataInput) => {
     document.querySelector('.error').innerHTML = "";
+    document.querySelector('.box2').style.borderRight = '2px solid transparent';
+    document.querySelector('.box1').style.borderRight = '2px solid transparent';
     if (dataInput) {
         console.log(dataInput)
 
@@ -74,6 +77,9 @@ const printResult = (dataInput) => {
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
         h1.innerHTML = `${temperature}${unit}`;
+        //Make the borders visable. 
+        document.querySelector('.box1').style.borderRight = '2px solid rgb(218, 218, 218)';
+        document.querySelector('.box2').style.borderRight = '2px solid rgb(218, 218, 218)';
 
         //Här kan man lägga till ikoner på väder om man vill. 
         //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
@@ -85,19 +91,24 @@ const printResult = (dataInput) => {
             document.querySelector('.icon').src = "IMG/rain.png";
             document.querySelector('.icon').style.display = 'block';
          }
-         else if (dataInput.weather[0].description.includes('clouds')) {
+         else if (dataInput.weather[0].description.includes('cloud')) {
             document.querySelector('.icon').src = "IMG/clouds.png";
             document.querySelector('.icon').style.display = 'block';
          }
-         else if (dataInput.weather[0].description.includes('sun')) {
+         else if (dataInput.weather[0].description.includes('fog')) {
+            document.querySelector('.icon').src = "IMG/clouds.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
+         else if (dataInput.weather[0].description.includes('clear')) {
             document.querySelector('.icon').src = "IMG/sun.png";
             document.querySelector('.icon').style.display = 'block';
          }
-
     } else {
         console.log("Something went wrong.");
-        document.querySelector('.error').innerHTML = "<br>Kunde inte hitta det du sökte efter. Försök igen."
+        document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
         document.querySelector('.error').style.display = 'block';
+        document.querySelector('.box1').style.borderRight = '2px solid transparent';
+        document.querySelector('.box2').style.borderRight = '2px solid transparent';
     }
 }
 
