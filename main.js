@@ -1,20 +1,19 @@
 // FÖBÄTTRING: HÄMTA ALLA KÄLLOR SOM BEHÖVS FÖRST. 
 //ONCHANGE - för att ge förslag medan man skriver?
-//Se till att felmeddelandet försvinner när fetchen går bra igen
+ 
 
 //En överraska mig knapp som genererar en random stad? 
 
 //Få Ändra-knappen att endast synas efter man sökt en gång. 
 
-
-//Jämföra graderna mellan två ställen?
-//Lägga till description fog.  
+//Ev. lägga till högsta och lägsta temp?? 
+//Skriva ut även beskrivningen? 
+//HOVER EFFEKT PÅ SEARCHBAR OCH FAHRENHEIT KNAPPEN
+//Flytta farh knappen till höger längst ner. 
 
 
 //JOHAN. 
-//1. ERRORHANTERING. VART OCH VAD MER?
-//2. BUGG - Beror på units. Måste skickas med från början. 
-//3. HJÄLP??????
+//1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
 
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
@@ -25,6 +24,8 @@ let isCelsius = true;
 
 const h2 = document.querySelector('.h2');
 const h1 = document.querySelector('.h1');
+const firstH3 = document.querySelector('.h3-1');
+const secondH3 = document.querySelector('.h3-2');
 const icon = document.querySelector('.icon');
 const fahrBtn = document.querySelector('#fahrenheit-btn');
 const searchBox = document.querySelector('.search');
@@ -32,23 +33,30 @@ const searchBox = document.querySelector('.search');
 function getUnit() {
     return isCelsius ? 'metric' : 'imperial';
 }
+
 async function checkWeather() {
     h1.innerHTML = "";
     h2.innerHTML = "";
     icon.style.display = 'none'; 
+    document.querySelector('.wikipedia-content').innerHTML="";
 
     const inputCity = document.getElementById('search-bar').value;
+    //Calling getUnit in the url to get the accurate unitvalue. 
     const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
-    //const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${inputCity}&appid=${apiKey}`;
+
     const fetchedData = await fetchData(weatherUrl);
 
+    if (fetchedData) {
     const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
-
-    document.querySelector('body').appendChild(
-        document.createTextNode(wikipediaSummary.extract)
-    )
-
+    console.log(wikipediaSummary);
+    
     printResult(fetchedData);
+    printSummary(wikipediaSummary);
+    }else {
+        printError()
+        console.error("something went wrong.");
+    }
+    
 }
 
 async function fetchData(url) {
@@ -63,16 +71,22 @@ async function fetchData(url) {
 }
 
 const printResult = (dataInput) => {
-    document.querySelector('.content').innerHTML = "";
+    document.querySelector('.error').innerHTML = "";
+   
+    document.querySelector('.box2').style.borderRight = '2px solid transparent';
+    document.querySelector('.box1').style.borderRight = '2px solid transparent';
     if (dataInput) {
         console.log(dataInput)
 
-        h2.innerHTML = "Vädret i " + dataInput.name + " är:"
-        // h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
+        firstH3.innerHTML = "Vädret i ";
+        h2.innerHTML = dataInput.name;
 
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
         h1.innerHTML = `${temperature}${unit}`;
+        //Make the borders visable. 
+        document.querySelector('.box1').style.borderRight = '2px solid rgb(218, 218, 218)';
+        document.querySelector('.box2').style.borderRight = '2px solid rgb(218, 218, 218)';
 
         //Här kan man lägga till ikoner på väder om man vill. 
         //Lägger till en ikon för varje beskrivning som innehåller ordet snow. 
@@ -84,19 +98,18 @@ const printResult = (dataInput) => {
             document.querySelector('.icon').src = "IMG/rain.png";
             document.querySelector('.icon').style.display = 'block';
          }
-         else if (dataInput.weather[0].description.includes('clouds')) {
+         else if (dataInput.weather[0].description.includes('cloud')) {
             document.querySelector('.icon').src = "IMG/clouds.png";
             document.querySelector('.icon').style.display = 'block';
          }
-         else if (dataInput.weather[0].description.includes('sun')) {
+         else if (dataInput.weather[0].description.includes('fog')) {
+            document.querySelector('.icon').src = "IMG/clouds.png";
+            document.querySelector('.icon').style.display = 'block';
+         }
+         else if (dataInput.weather[0].description.includes('clear')) {
             document.querySelector('.icon').src = "IMG/sun.png";
             document.querySelector('.icon').style.display = 'block';
          }
-
-    } else {
-        console.log("Something went wrong.");
-        document.querySelector('.content').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
-        document.querySelector('.content').style.display = 'block';
     }
 }
 
@@ -116,6 +129,16 @@ async function changeMetric() {
     fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
 }
 
+function printSummary(wikipediaSummary){
+    document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
+ }
+
+ function printError(){
+    document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+    document.querySelector('.error').style.display = 'block';
+    document.querySelector('.box1').style.borderRight = '2px solid transparent';
+    document.querySelector('.box2').style.borderRight = '2px solid transparent';
+ }
 
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
