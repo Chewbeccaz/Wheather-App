@@ -21,13 +21,14 @@ body {
 }
 .icon{
     display:none; 
-    width: 60px; 
-    height: 60px; 
+    width: 70px; 
+    height: 70px; 
 }
 
 #titel{
     text-transform: uppercase;
-    letter-spacing: 0.2em;  
+    letter-spacing: 0.2em; 
+    font-size: 2em; 
     margin-top:0px; 
     margin-bottom: 50px;    
 }
@@ -96,8 +97,16 @@ input#search-bar {
     
   }
 
-  h1, h2, .wikipedia-content{
+  h1 {
     color:white; 
+    font-size: 3em;
+  }
+
+  h2 {
+    color:white;
+    font-size: 2em; 
+    margin-top: 4px; 
+    letter-spacing: 0.1em;
   }
 
   .error{

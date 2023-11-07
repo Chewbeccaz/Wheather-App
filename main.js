@@ -13,6 +13,7 @@
 //Fixa ny fontfamily. 
 //Städa
 //Fixa root: styling. Korta ner. 
+//Ev. flytta upp fahrknappen bredvid sök? 
 
 
 //JOHAN. 
@@ -75,14 +76,16 @@ async function fetchData(url) {
 
 const printResult = (dataInput) => {
     document.querySelector('.error').innerHTML = "";
-   
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
     document.querySelector('.box1').style.borderRight = '2px solid transparent';
+
+    const inputCity = document.getElementById('search-bar').value;
+
     if (dataInput) {
         console.log(dataInput)
 
         firstH3.innerHTML = "Vädret i ";
-        h2.innerHTML = dataInput.name;
+        h2.innerHTML = inputCity;
 
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
@@ -142,6 +145,7 @@ function printSummary(wikipediaSummary){
     document.querySelector('.error').style.display = 'block';
     document.querySelector('.box1').style.borderRight = '2px solid transparent';
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
+    document.querySelector('.h3-1').innerHTML="";
  }
 
 
