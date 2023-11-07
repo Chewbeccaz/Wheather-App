@@ -9,12 +9,12 @@
 //Få Ändra-knappen att endast synas efter man sökt en gång. 
 
 //Ev. lägga till högsta och lägsta temp?? 
+//Skriva ut även beskrivningen? 
+//HOVER EFFEKT PÅ SEARCHBAR OCH FAHRENHEIT KNAPPEN
 
 
 //JOHAN. 
-//1. ERRORHANTERING. VART OCH VAD MER?
-//2. BUGG - Beror på units. Måste skickas med från början. 
-//3. HJÄLP??????
+//1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
 
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
@@ -37,20 +37,25 @@ async function checkWeather() {
     h1.innerHTML = "";
     h2.innerHTML = "";
     icon.style.display = 'none'; 
+    document.querySelector('.wikipedia-content').innerHTML="";
 
     const inputCity = document.getElementById('search-bar').value;
+    //Calling getUnit in the url to get the accurate unitvalue. 
     const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
 
     const fetchedData = await fetchData(weatherUrl);
 
+    if (fetchedData) {
     const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
     console.log(wikipediaSummary);
-    printSummery(wikipediaSummary);
-    // document.querySelector('body').appendChild(
-    //     document.createTextNode(wikipediaSummary.extract)
-    // )
-
+    
     printResult(fetchedData);
+    printSummary(wikipediaSummary);
+    }else {
+        printError()
+        console.error("something went wrong.");
+    }
+    
 }
 
 async function fetchData(url) {
@@ -66,13 +71,13 @@ async function fetchData(url) {
 
 const printResult = (dataInput) => {
     document.querySelector('.error').innerHTML = "";
+   
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
     document.querySelector('.box1').style.borderRight = '2px solid transparent';
     if (dataInput) {
         console.log(dataInput)
 
         h2.innerHTML = "Vädret i " + dataInput.name + " är:"
-        // h1.innerHTML = Math.round(dataInput.main.temp) + "°C";
 
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
@@ -103,12 +108,6 @@ const printResult = (dataInput) => {
             document.querySelector('.icon').src = "IMG/sun.png";
             document.querySelector('.icon').style.display = 'block';
          }
-    } else {
-        console.log("Something went wrong.");
-        document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
-        document.querySelector('.error').style.display = 'block';
-        document.querySelector('.box1').style.borderRight = '2px solid transparent';
-        document.querySelector('.box2').style.borderRight = '2px solid transparent';
     }
 }
 
@@ -128,10 +127,16 @@ async function changeMetric() {
     fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
 }
 
-function printSummery(wikipediaSummary){
+function printSummary(wikipediaSummary){
     document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
  }
 
+ function printError(){
+    document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+    document.querySelector('.error').style.display = 'block';
+    document.querySelector('.box1').style.borderRight = '2px solid transparent';
+    document.querySelector('.box2').style.borderRight = '2px solid transparent';
+ }
 
 
  //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
