@@ -43,10 +43,11 @@ async function checkWeather() {
     const fetchedData = await fetchData(weatherUrl);
 
     const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
-
-    document.querySelector('body').appendChild(
-        document.createTextNode(wikipediaSummary.extract)
-    )
+    console.log(wikipediaSummary);
+    printSummery(wikipediaSummary);
+    // document.querySelector('body').appendChild(
+    //     document.createTextNode(wikipediaSummary.extract)
+    // )
 
     printResult(fetchedData);
 }
@@ -63,7 +64,7 @@ async function fetchData(url) {
 }
 
 const printResult = (dataInput) => {
-    document.querySelector('.content').innerHTML = "";
+    document.querySelector('.error').innerHTML = "";
     if (dataInput) {
         console.log(dataInput)
 
@@ -95,8 +96,8 @@ const printResult = (dataInput) => {
 
     } else {
         console.log("Something went wrong.");
-        document.querySelector('.content').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
-        document.querySelector('.content').style.display = 'block';
+        document.querySelector('.error').innerHTML = "<br>Kunde inte hitta det du sökte efter. Försök igen."
+        document.querySelector('.error').style.display = 'block';
     }
 }
 
@@ -115,6 +116,10 @@ async function changeMetric() {
     //Ändra text beroende på om isCelsius is true/false. 
     fahrBtn.innerText = isCelsius ? 'Change to Fahrenheit' : 'Change to Celsius';
 }
+
+function printSummery(wikipediaSummary){
+    document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
+ }
 
 
 

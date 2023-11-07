@@ -83,11 +83,13 @@ input#search-bar {
     
   }
 
-  h1, h2{
+  h1, h2, .wikipedia-content{
     color:white; 
   }
 
-  .content{
-    display: none;
+  .error{
+    display: block;
     color:white; 
+    text-align:center;
+    margin:0 auto; 
   }
