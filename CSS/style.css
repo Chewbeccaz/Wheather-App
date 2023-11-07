@@ -100,11 +100,6 @@ input#search-bar {
     color:white; 
   }
 
-  .wikipedia-content{
-    color:white;
-    padding:20px; 
-  }
-
   .error{
     display: block;
     color:white; 
@@ -140,4 +135,7 @@ input#search-bar {
 
 .wikipedia-content {
     grid-column: 1 / -1;
+    color:white;
+    padding:20px; 
+    display: none;
 }

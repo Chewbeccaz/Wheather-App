@@ -133,6 +133,7 @@ async function changeMetric() {
 }
 
 function printSummary(wikipediaSummary){
+    document.querySelector('.wikipedia-content').style.display='block';
     document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
  }
 
