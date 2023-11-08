@@ -15,6 +15,8 @@
 //Fixa root: styling. Korta ner. 
 //Ev. flytta upp fahrknappen bredvid sök? 
 
+//LÄgg till description för mist. 
+
 
 //JOHAN. 
 //1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
@@ -121,6 +123,10 @@ const printResult = (dataInput) => {
 
 async function changeMetric() {
     console.log('funkar detta?')
+
+    const imgElement = document.querySelector('.toggle-icon');
+    imgElement.src = isCelsius ? "IMG/toggle_off.png" : "IMG/toggle_on.png";
+    
     isCelsius = !isCelsius; // Toggle the value
 
     const inputCity = document.getElementById('search-bar').value;
@@ -132,7 +138,12 @@ async function changeMetric() {
 
 
     //Ändra text beroende på om isCelsius is true/false. 
-    fahrBtn.innerText = isCelsius ? '°F' : '°C';
+    // fahrBtn.innerText = isCelsius ? '°F' : '°C';
+
+    // const celsiusLabel = document.querySelector('#cel-label');
+    // const fahrenheitLabel = document.querySelector('#fahr-label');
+    // celsiusLabel.innerText = isCelsius ? '°C' : '°F';
+    // fahrenheitLabel.innerText = isCelsius ? '°F' : '°C';
 }
 
 function printSummary(wikipediaSummary){

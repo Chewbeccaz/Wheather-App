@@ -1,3 +1,14 @@
+:root{
+    --main-bg-color: #0e0e0eaf;
+    --btn-bg-color: #a6a1a183;
+    --btn-hover-color: #6d686883;
+    --btn-size: 44px;
+    --icon-size: 70px; 
+    --main-text-color: #fff;
+    --secondary-text-color: red; 
+    /*Add size and family too*/ 
+}
+
 body {
     display: flex; 
     justify-content: center;
@@ -11,18 +22,18 @@ body {
 }
 
 .weather-box{
-    background-color: #0e0e0eaf;
+    background-color: var(--main-bg-color);
     padding:3em;
     border-radius: 30px;
     min-width: 600px;
     max-width: 720px;
     margin: 1em;  
-    color:fff; 
+    color: var(--main-text-color); 
 }
 .icon{
     display:none; 
-    width: 70px; 
-    height: 70px; 
+    width: var(--icon-size);
+    height: var(--icon-size);
 }
 
 #titel{
@@ -48,16 +59,16 @@ body {
     margin: 0.5em;
     border-radius: 50%;
     border: none;
-    height: 44px;
-    width: 44px;
-    outline: none;
-    background: #a6a1a183;
-    color: white;
+    height: var(--btn-size);
+    width: var(--btn-size);
+    /* outline: none; */
+    background: var(--btn-bg-color);
+    color: var(--main-text-color);
     cursor: pointer;
     transition: 0.2s ease-in-out;
 }
 #search-btn:hover{
-    background: #6d686883;
+    background: var(--btn-hover-color);
 }
 .fahrenheit-box{
     display: flex;
@@ -66,44 +77,46 @@ body {
 }
 
 #fahrenheit-btn{
-    margin: 0.5em;
+    margin-right: 15px; 
     border-radius: 50%;
     border: none;
-    height: 44px;
-    width: 44px;
-    background: #a6a1a183;
-    color: white;
+    height: var(--btn-size);
+    width: var(--btn-size);
+    background: transparent;
+    color: var(--main-text-color);
     cursor: pointer;
     transition: 0.2s ease-in-out;
+
 }
-#fahrenheit-btn:hover{
-    background: #6d686883;
+
+.toggle-icon{
+    height: var(--btn-size);
+    width: var(--btn-size);
 }
 
 
 input#search-bar {
     border: none;
-    outline: none;
+    /* outline: none; */
     padding: 0.4em 1em;
     border-radius: 24px;
-    background: #989292c7;
+    background: var(--btn-bg-color);
     color: rgb(255, 255, 255);
     font-size: 100%;
     width: 75%;
   }
 
   input#search-bar::placeholder{
-    color:white;
-    
+    color:var(--main-text-color); 
   }
 
   h1 {
-    color:white; 
+    color:var(--main-text-color);
     font-size: 3em;
   }
 
   h2 {
-    color:white;
+    color:var(--main-text-color);
     font-size: 2em; 
     margin-top: 4px; 
     letter-spacing: 0.1em;
@@ -111,7 +124,7 @@ input#search-bar {
 
   .error{
     display: block;
-    color:white; 
+    color:var(--main-text-color);
     text-align:center;
     margin:0 auto; 
   }
@@ -133,7 +146,7 @@ input#search-bar {
     border-right: 2px solid transparent;
     display: flex;
     flex-direction: column;
-    color: white;
+    color: var(--main-text-color);
 }
 
 .h3-1{
@@ -144,7 +157,7 @@ input#search-bar {
 
 .wikipedia-content {
     grid-column: 1 / -1;
-    color:white;
+    color: var(--main-text-color);
     padding:20px; 
     display: none;
 }
