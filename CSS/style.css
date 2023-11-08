@@ -77,19 +77,16 @@ body {
 }
 
 #fahrenheit-btn{
-    margin: 0.5em;
+    margin-right: 15px; 
     border-radius: 50%;
     border: none;
     height: var(--btn-size);
     width: var(--btn-size);
-    background: var(--btn-bg-color);
+    background: transparent;
     color: var(--main-text-color);
     cursor: pointer;
     transition: 0.2s ease-in-out;
 
-}
-#fahrenheit-btn:hover{
-    background: var(--btn-hover-color);
 }
 
 .toggle-icon{

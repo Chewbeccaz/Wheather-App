@@ -126,6 +126,7 @@ async function changeMetric() {
 
     const imgElement = document.querySelector('.toggle-icon');
     imgElement.src = isCelsius ? "IMG/toggle_off.png" : "IMG/toggle_on.png";
+    
     isCelsius = !isCelsius; // Toggle the value
 
     const inputCity = document.getElementById('search-bar').value;
