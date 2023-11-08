@@ -86,9 +86,15 @@ body {
     color: var(--main-text-color);
     cursor: pointer;
     transition: 0.2s ease-in-out;
+
 }
 #fahrenheit-btn:hover{
     background: var(--btn-hover-color);
+}
+
+.toggle-icon{
+    height: var(--btn-size);
+    width: var(--btn-size);
 }
 
 
