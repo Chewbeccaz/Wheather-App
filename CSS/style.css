@@ -1,6 +1,6 @@
 :root{
     --main-bg-color: #0e0e0eaf;
-    --btn-bg-color: #a6a1a183;
+    --btn-bg-color: #b5b0b083;
     --btn-hover-color: #6d686883;
     --btn-size: 44px;
     --icon-size: 70px; 
@@ -61,7 +61,6 @@ body {
     border: none;
     height: var(--btn-size);
     width: var(--btn-size);
-    /* outline: none; */
     background: var(--btn-bg-color);
     color: var(--main-text-color);
     cursor: pointer;
@@ -75,20 +74,16 @@ body {
     align-items: center;
     justify-content: flex-end;
 }
-
 #fahrenheit-btn{
     margin-right: 12px; 
     margin-left:2px; 
-   
-    border-radius: 50%;
-    border: none;
+    border: none; 
     height: var(--btn-size);
     width: var(--btn-size);
     background: transparent;
     color: var(--main-text-color);
     cursor: pointer;
     transition: 0.2s ease-in-out;
-
 }
 
 .toggle-icon{
@@ -96,10 +91,8 @@ body {
     width: var(--btn-size);
 }
 
-
 input#search-bar {
     border: none;
-    /* outline: none; */
     padding: 0.4em 1em;
     border-radius: 24px;
     background: var(--btn-bg-color);
@@ -107,7 +100,6 @@ input#search-bar {
     font-size: 100%;
     width: 75%;
   }
-
   input#search-bar::placeholder{
     color:var(--main-text-color); 
   }
@@ -122,6 +114,7 @@ input#search-bar {
     font-size: 2em; 
     margin-top: 4px; 
     letter-spacing: 0.1em;
+    text-transform: capitalize;
   }
 
   .error{
@@ -155,6 +148,7 @@ input#search-bar {
     margin-bottom:0px;
     text-transform: uppercase;
     letter-spacing: 0.2em;
+    color: var(--btn-bg-color);
 }
 
 .wikipedia-content {

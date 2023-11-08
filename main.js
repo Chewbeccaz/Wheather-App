@@ -3,6 +3,9 @@
 //Fixa ny fontfamily. 
 //Städa kod 
 
+//Kolla på error hantering igen och lägg till mer? 
+//Byta namn på h1-h2- till cityname och temperture. 
+
 //JOHAN. 
 //1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
 
@@ -26,6 +29,7 @@ function getUnit() {
 
 //Function connected to the search-btn. 
 async function checkWeather() {
+try {
     h1.innerHTML = "";
     h2.innerHTML = "";
     icon.style.display = 'none'; 
@@ -46,6 +50,9 @@ async function checkWeather() {
         printError()
         console.error("something went wrong.");
     }
+} catch(error){
+    console.error("An error has occured", error);
+}
 }
 
 //fetchfunction
@@ -55,8 +62,10 @@ async function fetchData(url) {
         const data = await response.json();
         return data;
     } else {
-        console.error("API request failed:", response.status);
-        return null; 
+        printError();
+        // console.error("API request failed:", response.status);
+        // return null; 
+        throw new Error(`API request failed with status ${response.status}`);
     }
 }
 //Function for printing results. 
@@ -129,13 +138,3 @@ function printSummary(wikipediaSummary){
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
     document.querySelector('.h3-1').innerHTML="";
  }
-
-
- //JOHAN EXEMPEL await fetch('https://url').then(yay, nooo)
-// const yay = (data) => {
-//     console.log(data)
-// }
-
-// const nooo = (error) => {
-//     console.error(':(')
-// }
