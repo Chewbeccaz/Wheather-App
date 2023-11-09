@@ -156,4 +156,7 @@ input#search-bar {
     color: var(--main-text-color);
     padding:20px; 
     display: none;
+    /* border-bottom: 1px solid white; */
+    margin-top:20px;
+    /* border: 1px solid white; */
 }
