@@ -1,4 +1,3 @@
-//HOVER EFFEKT PÅ SEARCHBAR
 //Fixa ny fontfamily. 
 //Städa kod 
 
@@ -147,5 +146,4 @@ function printSummary(wikipediaSummary){
     document.querySelector('.h3-1').innerHTML="";
     document.querySelector('.high-low').innerHTML="";
     document.querySelector('.wikipedia-header').innerText ="";
-
  }
