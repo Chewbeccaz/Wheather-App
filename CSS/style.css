@@ -104,6 +104,9 @@ input#search-bar {
   input#search-bar::placeholder{
     color:var(--main-text-color); 
   }
+  input#search-bar:hover{
+    background-color:var(--btn-hover-color); 
+  }
 
   h1 {
     color:var(--main-text-color);

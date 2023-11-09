@@ -1,14 +1,8 @@
-//Ev. lägga till högsta och lägsta temp?? 
 //HOVER EFFEKT PÅ SEARCHBAR
 //Fixa ny fontfamily. 
 //Städa kod 
 
 //Kolla på error hantering igen och lägg till mer? 
-//Byta namn på h1-h2- till cityname och temperture. 
-
-//JOHAN. 
-//1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
-
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}`
