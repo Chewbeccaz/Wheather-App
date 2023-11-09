@@ -1,14 +1,7 @@
-//Ev. lägga till högsta och lägsta temp?? 
-//HOVER EFFEKT PÅ SEARCHBAR
 //Fixa ny fontfamily. 
 //Städa kod 
 
 //Kolla på error hantering igen och lägg till mer? 
-//Byta namn på h1-h2- till cityname och temperture. 
-
-//JOHAN. 
-//1. ERRORHANTERING. VART OCH VAD MER? paja url:n med flit 
-
 
 const apiKey = "72c683fa486d6d0335603532705a98ff";
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}`
@@ -21,6 +14,8 @@ const h1 = document.querySelector('.h1');
 const firstH3 = document.querySelector('.h3-1');
 const secondH3 = document.querySelector('.h3-2'); //Används ej just nu
 const icon = document.querySelector('.icon');
+const wikiHeader = document.querySelector('.wikipedia-header');
+const highLow = document.querySelector('.high-low');
 
 //Function for checking the unit. 
 function getUnit() {
@@ -83,10 +78,18 @@ const printResult = (dataInput) => {
         const temperature = Math.round(dataInput.main.temp);
         const unit = isCelsius ? '°C' : '°F';
         h1.innerHTML = `${temperature}${unit}`;
+        highLow.innerHTML = `Högsta: ${Math.round(dataInput.main.temp_max)}${unit} <br>Lägsta: ${Math.round(dataInput.main.temp_min)}${unit}`;
 
         //Make the borders visable. 
         document.querySelector('.box1').style.borderRight = '2px solid rgb(218, 218, 218)';
         document.querySelector('.box2').style.borderRight = '2px solid rgb(218, 218, 218)';
+        if (window.innerWidth <= 820) {
+            document.querySelector('.box1').style.borderBottom = '1px solid #b5b0b083';
+            document.querySelector('.box2').style.borderBottom = '1px solid #b5b0b083';
+          } else {
+            document.querySelector('.box2').style.borderBottom = 'none';
+            document.querySelector('.box1').style.borderBottom = 'none';
+          }
 
         //Adding icons depending on the description
         const weatherIcon = document.querySelector('.icon');
@@ -129,12 +132,18 @@ async function changeMetric() {
 function printSummary(wikipediaSummary){
     document.querySelector('.wikipedia-content').style.display='block';
     document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
+    document.querySelector('.wikipedia-header').innerText = 'Visste du detta?'
+    document.querySelector('.wikipedia-header').style.display='block';
  }
 
  function printError(){
+
+    //Skriva om det här med removechild? 
     document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
     document.querySelector('.error').style.display = 'block';
     document.querySelector('.box1').style.borderRight = '2px solid transparent';
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
     document.querySelector('.h3-1').innerHTML="";
+    document.querySelector('.high-low').innerHTML="";
+    document.querySelector('.wikipedia-header').innerText ="";
  }
