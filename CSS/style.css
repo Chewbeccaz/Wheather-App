@@ -3,7 +3,7 @@
     --btn-bg-color: #b5b0b083;
     --btn-hover-color: #6d686883;
     --btn-size: 44px;
-    --icon-size: 70px; 
+    --icon-size: 80px; 
     --main-text-color: #fff;
     --secondary-text-color: red; 
     /*Add size and family too*/ 
@@ -17,8 +17,9 @@ body {
     margin: 0; 
     background-color: #222;
     background-image: url('https://source.unsplash.com/1600x900/?landscape');
-    background-size: 100%; 
+    background-size: cover;
     background-repeat: no-repeat;
+    /* font-family:Serif Garamond; */
 }
 
 .weather-box{
@@ -51,7 +52,7 @@ body {
     margin: 0 auto; 
     margin-bottom: 0px;
     padding:20px;
-    min-width: 420px;
+    min-width: 200px;
     max-width:520px; 
 }
 /*Searchbtn*/
@@ -107,6 +108,7 @@ input#search-bar {
   h1 {
     color:var(--main-text-color);
     font-size: 3em;
+    margin-bottom: 0; 
   }
 
   h2 {
@@ -135,6 +137,7 @@ input#search-bar {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    padding: 15px; 
 }
 
 .box1, .box2{
@@ -144,19 +147,114 @@ input#search-bar {
     color: var(--main-text-color);
 }
 
-.h3-1{
+.h3-1, .high-low{
     margin-bottom:0px;
+    margin-top: 4px; 
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--btn-bg-color);
 }
 
-.wikipedia-content {
+.wikipedia-content, .wikipedia-header {
     grid-column: 1 / -1;
     color: var(--main-text-color);
-    padding:20px; 
+    padding:0px 20px ; 
     display: none;
     /* border-bottom: 1px solid white; */
-    margin-top:20px;
     /* border: 1px solid white; */
 }
+.wikipedia-header {
+    grid-column: 1 / -1;
+    color: var(--btn-bg-color);
+    padding:0 20px; 
+    display: none;
+    /* border-bottom: 1px solid white; */
+    margin-top:40px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom:0; 
+    /* border: 1px solid white; */
+}
+
+@media only screen and (max-width: 820px) {
+  
+    body{
+        background-size: 100% 120%; 
+        height: auto; 
+        padding: 40px 0 40px 0;
+    }
+    .weather-box {
+      min-width: auto;
+      max-width: 80%;
+      min-height: 300px;
+      padding: 1em;
+      border-radius: 5px;
+    }
+  
+    #fahrenheit-btn {
+      height: 43px;
+      width: 43px;
+    }
+  
+    #titel{
+        padding: 10px; 
+        font-size: 1.6em;
+        line-height: 1.2em;
+        margin-bottom: 20px;
+        width: 80%;
+        margin: 0 auto; 
+    }
+    /* input#search-bar {
+      width: 50%;
+      min-width:200px;  
+    } */
+/* 
+    #search-bar{
+        width: 50%;
+    } */
+
+    .search{
+        border-top: 1px solid var(--btn-bg-color);
+        width: 90%; 
+    }
+  
+    h1 {
+      font-size: 2em;
+      text-align: center;
+    }
+    .h1{
+        font-size: 3em;
+        margin-top:4px;
+    }
+    .high-low{
+        margin-bottom: 12px;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    .weather {
+      grid-template-columns: repeat(1, 1fr); 
+      
+    }
+  
+    .box1,
+    .box2{
+      margin-top: 10px;
+      border-bottom: 1px solid transparent;
+      border-right: none !important;
+      width: 60%; 
+      margin: 0 auto; 
+    }
+    .box2{
+        margin-bottom: 10px;
+    }
+    .box3 {
+        width: 60%; 
+        margin: 20px auto;  
+      }
+
+
+  }
+  
