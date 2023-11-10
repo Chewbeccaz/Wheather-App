@@ -15,7 +15,7 @@ body {
     height: 90vh; 
     margin: 0; 
     background-color: #222;
-    background-image: url('https://source.unsplash.com/1600x900/?landscape');
+    background-image: url('https://source.unsplash.com/1600x900/?landscape'); /*random landscape-img*/
     background-size: cover;
     background-repeat: no-repeat;
     padding: 40px 0 40px 0;
@@ -233,7 +233,7 @@ input#search-bar {
     .box2{
       margin-top: 10px;
       border-bottom: 1px solid transparent;
-      border-right: none !important;
+      border-right: none !important; /* Writing over the js-initialization*/
       width: 60%; 
       margin: 0 auto; 
     }
