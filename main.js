@@ -22,32 +22,34 @@ function getUnit() {
     return isCelsius ? 'metric' : 'imperial';
 }
 
+
+//Checkweather borde kasta error. PrintError()
 //Function connected to the search-btn. 
 async function checkWeather() {
-try {
-    h1.innerHTML = "";
-    h2.innerHTML = "";
-    icon.style.display = 'none'; 
-    document.querySelector('.wikipedia-content').innerHTML="";
+    try {
+        h1.innerHTML = "";
+        h2.innerHTML = "";
+        icon.style.display = 'none'; 
+        document.querySelector('.wikipedia-content').innerHTML="";
 
-    const inputCity = document.getElementById('search-bar').value;
-    //Calling getUnit in the url to get the accurate unitvalue. 
-    const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
-    const fetchedData = await fetchData(weatherUrl);
+        const inputCity = document.getElementById('search-bar').value;
+        //Calling getUnit in the url to get the accurate unitvalue. 
+        const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
+        const fetchedData = await fetchData(weatherUrl);
 
-    //If fetch went through - call the wikipedia-fetch. 
-    if (fetchedData) {
-    const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
-    printResult(fetchedData);
-    printSummary(wikipediaSummary);
+        //If fetch went through - call the wikipedia-fetch. 
+        if (fetchedData) {
+            const wikipediaSummary = await fetchData(`https://sv.wikipedia.org/api/rest_v1/page/summary/${inputCity}`)
+            printResult(fetchedData);
+            printSummary(wikipediaSummary);
+        }
+        else {
+            printError()
+            console.error("something went wrong.");
+        }
+    } catch(error){
+        console.error("An error has occured", error);
     }
-    else{
-        printError()
-        console.error("something went wrong.");
-    }
-} catch(error){
-    console.error("An error has occured", error);
-}
 }
 
 //fetchfunction
@@ -114,8 +116,8 @@ const printResult = (dataInput) => {
     }
 }
 //Function for switching between celsius and fahrenheit.
+/* try-catch här elleh? */
 async function changeMetric() {
-    console.log('funkar detta?')
 
     const imgElement = document.querySelector('.toggle-icon');
     imgElement.src = isCelsius ? "IMG/toggle_off.png" : "IMG/toggle_on.png";
@@ -123,27 +125,30 @@ async function changeMetric() {
     isCelsius = !isCelsius; // Toggle the value true/false
 
     const inputCity = document.getElementById('search-bar').value;
-    const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`
-    const fetchedData = await fetchData(weatherUrl);
-    printResult(fetchedData);
+
+        const weatherUrl = `${baseUrl}&units=${getUnit()}&q=${inputCity}`;
+        const fetchedData = await fetchData(weatherUrl);
+        printResult(fetchedData);
+
+
 }
 
 //Function for printing out wikipedia-fetch
-function printSummary(wikipediaSummary){
-    document.querySelector('.wikipedia-content').style.display='block';
-    document.querySelector('.wikipedia-content').innerHTML=(wikipediaSummary.extract);
+function printSummary(wikipediaSummary) {
+    document.querySelector('.wikipedia-content').style.display = 'block';
+    document.querySelector('.wikipedia-content').innerHTML = (wikipediaSummary.extract);
     document.querySelector('.wikipedia-header').innerText = 'Visste du detta?'
-    document.querySelector('.wikipedia-header').style.display='block';
+    document.querySelector('.wikipedia-header').style.display = 'block';
  }
 
- function printError(){
+ function printError() {
 
     //Skriva om det här med removechild? 
-    document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen."
+    document.querySelector('.error').innerHTML = "Kunde inte hitta det du sökte efter. Försök igen.";
     document.querySelector('.error').style.display = 'block';
     document.querySelector('.box1').style.borderRight = '2px solid transparent';
     document.querySelector('.box2').style.borderRight = '2px solid transparent';
-    document.querySelector('.h3-1').innerHTML="";
-    document.querySelector('.high-low').innerHTML="";
-    document.querySelector('.wikipedia-header').innerText ="";
+    document.querySelector('.h3-1').innerHTML = "";
+    document.querySelector('.high-low').innerHTML = "";
+    document.querySelector('.wikipedia-header').innerText = "";
  }
